@@ -2,12 +2,20 @@ package Utilities;
 
 import java.util.Date;
 
-public class Message {
-    public String text;
-    public Date timestamp;
+public class Message extends Event {
 
-    public Message( String text, Date timestamp ) {
+    private String text;
+    private Date timestamp;
+    public User poster;
+
+    public Message( String text, User poster) {
         this.text = text;
-        this.timestamp = timestamp;
+        this.timestamp = new Date();
+        this.poster = poster;
+    }
+
+    @Override
+    public void retrieveLog() {
+        System.out.println(poster.name + ": " + text + " @ " + timestamp);
     }
 }

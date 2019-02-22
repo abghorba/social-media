@@ -1,24 +1,38 @@
 package Utilities;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.TreeSet;
+
 public class Timeline {
 
     private ArrayList<Message> feed;
 
     public Timeline() {
-        feed = new ArrayList<Message>();
+        feed = new ArrayList<>();
     }
 
-    public void addToTimeline( String message ) {
-        Date timestamp = new Date();
-        Message newMessage = new Message(message, timestamp);
-        feed.add( newMessage );
+    public void addToFeed( Message newMessage ) {
+        feed.add(newMessage);
     }
 
-    public void displayTimeline() {
-        for (int index = 0; index < feed.size(); index++){
-            System.out.println( feed.get(index).text + " at " + feed.get(index).timestamp);
+    public void removeFromFeed( User removedFriend ) {
+        System.out.println("removing friend");
+        ArrayList<Message> toRemove = new ArrayList<>();
+
+        for (int index = 0; index < feed.size(); index++) {
+            if (feed.get(index).poster == removedFriend) {
+                toRemove.add(feed.get(index));
+            }
+        }
+
+        for (Message removeMessage : toRemove) {
+            feed.remove(removeMessage);
         }
     }
+    public void displayTimeline() {
+        for (Message news: feed) {
+            news.retrieveLog();
+        }
+    }
+
 }
